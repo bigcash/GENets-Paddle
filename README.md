@@ -1,11 +1,22 @@
 # GENets-Paddle
 paper replay in paddle(Neural Architecture Design for GPU-Efficient Networks)
 
-原作者实验中使用的是从训练集中随机抽取50000张未参与LLR-NAS训练的数据，作为验证集。
-python val.py --gpu 0 --batch_size 64 --data /home/lingbao/data/imagenet-mini/imagenet-mini-test/ --arch GENet_small --params_dir ./
-Warning!!! The GENets are trained by NVIDIA Apex, it is suggested to turn on --use_apex in the evaluation. Otherwise the model accuracy might be harmed.
-Evaluate GENet_small at 192x192 resolution.
-Using GPU 0.
-mini_batch 0, top-1 acc=   0%, top-5 acc=   0%, number of evaluated images=64
-mini_batch 100, top-1 acc=   0%, top-5 acc=   0%, number of evaluated images=6464
-*** arch=GENet_small, validation top-1 acc=0.0%, top-5 acc=0.01666666567325592%, number of evaluated images=12000, speed=602.529 img/s
+# read paper
+- 目标：设计一套GPU推理高效的且高性能的模型结构。设计一个高效的高精度网络，专门针对现代GPU上的快速推理进行优化
+- 设计灵感：This design is inspired by the observation that convolutional kernels in the high-level stages are more likely to have low intrinsic rank and different types of convolutions have different kinds of efficiency on GPU.
+- 设计原则：low-level stages使用全卷积，high-level stages使用dw卷积和bottleneck卷积。结构如下：
+![网络结构](asset/structure.png)
+- 设计过程：根据gpu端高效网络的设计原则，通过LLR-NAS来设计高效网络。
+
+# 原论文实验结果
+![performance](asset/performance.png)
+![performance table](asset/performance_table.png)
+
+# 复现过程
+- 数据：[ILSVRC2012_img_val.tar](https://aistudio.baidu.com/aistudio/datasetdetail/68594)
+- 预训练模型：从原repo中下载模型后，执行gen_pretrained.py将pytorch模型转换为paddle模型。[paddle模型](https://pan.baidu.com/s/1u-90N6kehZAyYBvM7QgQ8g)(l5hu)：GENet_large、GENet_normal、GENet_small。原repo提供的pytorch模型：[GENet_large](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_large.pth)、[GENet_normal](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_normal.pth)、[GENet_small](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_small.pth)
+- 评估模型：执行val.py，结果如下：
+![paddle模型推理](asset/genet_paddle_experiment.png)
+
+# Acknowledgement
+感谢[GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)

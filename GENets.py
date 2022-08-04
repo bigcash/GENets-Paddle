@@ -1,6 +1,6 @@
 import paddle
 import paddle.nn as nn
-paddle.set_device("cpu")
+# paddle.set_device("cpu")
 
 
 class Identity(nn.Layer):
@@ -12,9 +12,9 @@ class Identity(nn.Layer):
 
 
 class ConvKX(nn.Layer):
-    def __init__(self, in_channels=None, out_channels=None, kernel_size=None, stride=None, block_name=None, **kwargs):
+    def __init__(self, in_channels=None, out_channels=None, kernel_size=None, stride=None, name=None, **kwargs):
         super(ConvKX, self).__init__(**kwargs)
-        self.block_name = block_name
+        self.name = name
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.kernel_size = kernel_size
@@ -146,22 +146,21 @@ class PlainNet(nn.Layer):
     def __init__(self, num_classes=None, plainnet_struct=None, **kwargs):
         super(PlainNet, self).__init__(**kwargs)
         self.num_classes = num_classes
-        self.block_list = plainnet_struct
-        self.last_channels = self.block_list[-4].out_channels
+        self.module_list = nn.Sequential(*plainnet_struct)
+        self.last_channels = plainnet_struct[-4].out_channels
         self.fc_linear = nn.Linear(self.last_channels, self.num_classes, bias_attr=True)
 
     def forward(self, x):
         output = x
-        for the_block in self.block_list:
-            output = the_block(output)
-        output = paddle.flatten(output, 1)
+        output = self.module_list(output)
+        output = output.flatten(1)
         output = self.fc_linear(output)
         return output
 
 
 def genet_small(num_classes=1000, pretrained=False, model_path=""):
     plainnet_struct = [
-        ConvKX(3, 13, 3, 2),
+        ConvKX(3, 13, 3, 2, name="ConvKX"),
         nn.BatchNorm2D(13),
         nn.ReLU(),
         SuperResBlock("KXKX", 13, 48, 3, 2, 1.0, 1),
@@ -198,7 +197,8 @@ def genet_normal(num_classes=1000, pretrained=False, model_path=""):
     ]
     model = PlainNet(num_classes=num_classes, plainnet_struct=plainnet_struct)
     if pretrained:
-        pass
+        state_dict = paddle.load(model_path)
+        model.set_state_dict(state_dict)
     return model
 
 
@@ -219,23 +219,25 @@ def genet_large(num_classes=1000, pretrained=False, model_path=""):
     ]
     model = PlainNet(num_classes=num_classes, plainnet_struct=plainnet_struct)
     if pretrained:
-        pass
+        state_dict = paddle.load(model_path)
+        model.set_state_dict(state_dict)
     return model
 
 
 if __name__ == '__main__':
     print("GENet small test:")
-    model = genet_small(pretrained=True, model_path="/home/lingbao/work/code/GPU-Efficient-Networks/pd_model_trace_small/model.pdparams")
+    model = genet_small(pretrained=True, model_path="genet_small.pdparams")
     t = paddle.randn([4, 3, 192, 192])
     output = model(t)
     print(output.shape)
-    print("GENet normal test:")
-    model = genet_normal()
-    t = paddle.randn([4, 3, 192, 192])
-    output = model(t)
-    print(output.shape)
-    print("GENet large test:")
-    model = genet_large()
-    t = paddle.randn([4, 3, 256, 256])
-    output = model(t)
-    print(output.shape)
+    print(model.state_dict().keys())
+    # print("GENet normal test:")
+    # model = genet_normal(pretrained=True, model_path="genet_normal.pdparams")
+    # t = paddle.randn([4, 3, 192, 192])
+    # output = model(t)
+    # print(output.shape)
+    # print("GENet large test:")
+    # model = genet_large(pretrained=True, model_path="genet_large.pdparams")
+    # t = paddle.randn([4, 3, 256, 256])
+    # output = model(t)
+    # print(output.shape)
