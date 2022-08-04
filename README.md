@@ -14,7 +14,7 @@ paper replay in paddle(Neural Architecture Design for GPU-Efficient Networks)
 
 # 复现过程
 - 数据：[ILSVRC2012_img_val.tar](https://aistudio.baidu.com/aistudio/datasetdetail/68594)
-- 预训练模型：从原repo中下载模型后，执行gen_pretrained.py将pytorch模型转换为paddle模型。[paddle模型](https://pan.baidu.com/s/1u-90N6kehZAyYBvM7QgQ8g)(l5hu)：GENet_large、GENet_normal、GENet_small。原repo提供的pytorch模型：[GENet_large](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_large.pth)、[GENet_normal](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_normal.pth)、[GENet_small](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_small.pth)
+- 预训练模型：从原repo中下载模型后，执行gen_pretrained.py将pytorch模型转换为paddle模型。[paddle模型](https://pan.baidu.com/s/1u-90N6kehZAyYBvM7QgQ8g)(l5hu)：GENet_large、GENet_normal、GENet_small。(原repo提供的pytorch模型：[GENet_large](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_large.pth)、[GENet_normal](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_normal.pth)、[GENet_small](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_small.pth))
 - 评估模型：执行val.py，结果如下：
 ![paddle模型推理](asset/genet_paddle_experiment.png)
 
