@@ -17,7 +17,7 @@ if __name__ == '__main__':
                         help='number of workers to load dataset.')
     parser.add_argument('--gpu', type=int, default=0,
                         help='GPU device ID.')
-    parser.add_argument('--data', type=str, default="~/data/imagenet/imgs",
+    parser.add_argument('--data', type=str, default="/home/lingbao/data/imagenet/imgs",
                         help='ImageNet data directory.')
     parser.add_argument('--config', type=str, default="val_list.txt")
     parser.add_argument('--arch', type=str, default="GENet_large",
@@ -42,7 +42,8 @@ if __name__ == '__main__':
 
     print('Evaluate {} at {}x{} resolution.'.format(opt.arch, input_image_size, input_image_size))
 
-    # paddle.set_device('cpu')
+    if opt.gpu==-1:
+        paddle.set_device('cpu')
     # load dataset
     input_image_crop = 0.875
     resize_image_size = int(math.ceil(input_image_size / input_image_crop))
@@ -65,9 +66,12 @@ if __name__ == '__main__':
     device = 'cuda:{}'.format(opt.gpu)
     with paddle.no_grad():
         for i, (input, target) in enumerate(val_loader):
-            input = input.astype('float16')
-            with paddle.amp.auto_cast(level='O1'):
+            if opt.gpu == -1:
                 output = model(input)
+            else:
+                input = input.astype('float16')
+                with paddle.amp.auto_cast(level='O1'):
+                    output = model(input)
             target = target.reshape([-1, 1])
             acc1 = paddle.metric.accuracy(output, target, k=1)
             acc5 = paddle.metric.accuracy(output, target, k=5)
