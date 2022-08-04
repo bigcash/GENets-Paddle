@@ -1,4 +1,4 @@
-# A TRANSFORMER-BASED SIAMESE NETWORK FOR CHANGE DETECTION
+# Neural Architecture Design for GPU-Efficient Networks
   
 ## 目录
 
@@ -17,21 +17,21 @@
 
 ## 1. 简介
 
-论文: Ming Lin, Hesen Chen, Xiuyu Sun, Qi Qian, Hao Li, Rong Jin. Neural Architecture Design for GPU-Efficient Networks. arXiv:2006.14090 [cs.CV]. June 2020. [[arXiv](https://arxiv.org/abs/2006.14090)]
+- 论文: Ming Lin, Hesen Chen, Xiuyu Sun, Qi Qian, Hao Li, Rong Jin. Neural Architecture Design for GPU-Efficient Networks. arXiv:2006.14090 [cs.CV]. June 2020. [[arXiv](https://arxiv.org/abs/2006.14090)]
 
-参考repo: [GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)
+- 参考repo: [GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)
 
 在此非常感谢 `$idstcv$` `$MingLin-home$`等人贡献的[GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)，提高了本repo复现论文的效率。
 
-aistudio体验教程: [aistudio](https://aistudio.baidu.com/aistudio/projectdetail/4404628)
+- aistudio体验教程: [aistudio](https://aistudio.baidu.com/aistudio/projectdetail/4404628)
 
-paper reading:
+- paper reading:
 
-- 目标：设计一套GPU推理高效的且高性能的模型结构。设计一个高效的高精度网络，专门针对现代GPU上的快速推理进行优化
-- 设计灵感：This design is inspired by the observation that convolutional kernels in the high-level stages are more likely to have low intrinsic rank and different types of convolutions have different kinds of efficiency on GPU.
-- 设计原则：low-level stages使用全卷积(XX-Block)，high-level stages使用dw卷积(DW-Block)和bottleneck卷积(BL-Block)。结构如下：
+  - 目标：设计一套GPU推理高效的且高性能的模型结构。设计一个高效的高精度网络，专门针对现代GPU上的快速推理进行优化
+  - 设计灵感：This design is inspired by the observation that convolutional kernels in the high-level stages are more likely to have low intrinsic rank and different types of convolutions have different kinds of efficiency on GPU.
+  - 设计原则：low-level stages使用全卷积(XX-Block)，high-level stages使用dw卷积(DW-Block)和bottleneck卷积(BL-Block)。结构如下：
 ![网络结构](asset/structure.png)
-- 设计过程：根据gpu端高效网络的设计原则，通过LLR-NAS来设计高效网络。
+  - 设计过程：根据gpu端高效网络的设计原则，通过LLR-NAS来设计高效网络。
 
 ## 2. 数据集和复现精度
 
