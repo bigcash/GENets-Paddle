@@ -21,7 +21,7 @@
 
 - 参考repo: [GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)
 
-在此非常感谢 `$idstcv$` `$MingLin-home$`等人贡献的[GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)，提高了本repo复现论文的效率。
+在此非常感谢 `idstcv` `MingLin-home`等人贡献的[GPU-Efficient-Networks](https://github.com/idstcv/GPU-Efficient-Networks)，提高了本repo复现论文的效率。
 
 - aistudio体验教程: [aistudio](https://aistudio.baidu.com/aistudio/projectdetail/4404628)
 
@@ -108,7 +108,7 @@ python val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_path /pat
 
 日志如下：
 
-![paddle模型推理](asset/genet_paddle_experiment.png)
+![paddle模型推理](images/genet_paddle_experiment.png)
 
 ### 4.2 TIPC基础链条测试
 
