@@ -30,7 +30,7 @@
   - 目标：设计一套GPU推理高效的且高性能的模型结构。设计一个高效的高精度网络，专门针对现代GPU上的快速推理进行优化
   - 设计灵感：This design is inspired by the observation that convolutional kernels in the high-level stages are more likely to have low intrinsic rank and different types of convolutions have different kinds of efficiency on GPU.
   - 设计原则：low-level stages使用全卷积(XX-Block)，high-level stages使用dw卷积(DW-Block)和bottleneck卷积(BL-Block)。结构如下：
-![网络结构](asset/structure.png)
+![网络结构](images/structure.png)
   - 设计过程：根据gpu端高效网络的设计原则，通过LLR-NAS来设计高效网络。
 
 ## 2. 数据集和复现精度
@@ -97,13 +97,14 @@ pip install -r requirements.txt
 
 - 预训练模型(paddle)：[BAIDUYUN](https://pan.baidu.com/s/1u-90N6kehZAyYBvM7QgQ8g): l5hu
 - 原repo提供的pytorch模型：[GENet_large](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_large.pth)、[GENet_normal](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_normal.pth)、[GENet_small](https://idstcv.oss-cn-zhangjiakou.aliyuncs.com/GENet/GENet_small.pth)
+- 模型转换：执行`python tools/gen_pretrained.py`
 
 ## 4. 开始使用
 
-### 4.2 模型评估
+### 4.1 模型评估
 
 ```shell
-python val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_path /path/to/genet_large.pdparams --config /path/to/val_list.txt --batch_size 64 --workers 8
+python tools/val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_path /path/to/genet_large.pdparams --config /path/to/val_list.txt --batch_size 64 --workers 8
 ```
 
 日志如下：
