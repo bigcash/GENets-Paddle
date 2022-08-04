@@ -1,5 +1,6 @@
 # GENets-Paddle
 paper replay in paddle(Neural Architecture Design for GPU-Efficient Networks)
+
 Ming Lin, Hesen Chen, Xiuyu Sun, Qi Qian, Hao Li, Rong Jin. Neural Architecture Design for GPU-Efficient Networks. arXiv:2006.14090 [cs.CV]. June 2020. [[arXiv](https://arxiv.org/abs/2006.14090)]
 
 # read paper
