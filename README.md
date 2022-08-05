@@ -113,7 +113,7 @@ python tools/val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_pat
 
 ### 4.2 TIPC基础链条测试
 
-暂无
+参见[test_tipc](test_tipc/README.md)。
 
 ## 5. LICENSE
 
