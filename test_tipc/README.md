@@ -35,16 +35,50 @@ start → 模型结构对齐 → 准备小数据集，数据对齐 → 评估指
 
 ```shell
 python test_tipc/01_test_forward.py
+
+INFO 2022-08-05 15:50:30,463 utils.py:118] logits: 
+[2022/08/05 15:50:30] root INFO: logits: 
+INFO 2022-08-05 15:50:30,463 utils.py:124]      mean diff: check passed: True, value: 9.067356643299718e-08
+[2022/08/05 15:50:30] root INFO:        mean diff: check passed: True, value: 9.067356643299718e-08
+INFO 2022-08-05 15:50:30,464 ReprodDiffHelper.py:64] diff check passed
+[2022/08/05 15:50:30] root INFO: diff check passed
 ```
 
 - 数据加载对齐
 
 ```shell
 python test_tipc/02_test_data.py
+
+INFO 2022-08-05 15:52:15,021 utils.py:118] length: 
+[2022/08/05 15:52:15] root INFO: length: 
+INFO 2022-08-05 15:52:15,021 utils.py:124]      mean diff: check passed: True, value: 0.0
+[2022/08/05 15:52:15] root INFO:        mean diff: check passed: True, value: 0.0
+INFO 2022-08-05 15:52:15,021 utils.py:118] dataloader_0: 
+[2022/08/05 15:52:15] root INFO: dataloader_0: 
+INFO 2022-08-05 15:52:15,021 utils.py:124]      mean diff: check passed: True, value: 1.1075422889916808e-07
+[2022/08/05 15:52:15] root INFO:        mean diff: check passed: True, value: 1.1075422889916808e-07
+INFO 2022-08-05 15:52:15,021 utils.py:118] dataloader_1: 
+[2022/08/05 15:52:15] root INFO: dataloader_1: 
+INFO 2022-08-05 15:52:15,021 utils.py:124]      mean diff: check passed: True, value: 4.9047844896676907e-08
+[2022/08/05 15:52:15] root INFO:        mean diff: check passed: True, value: 4.9047844896676907e-08
+INFO 2022-08-05 15:52:15,021 ReprodDiffHelper.py:64] diff check passed
+[2022/08/05 15:52:15] root INFO: diff check passed
 ```
 
 - 评估指标对齐
 
 ```shell
 python test_tipc/03_test_metric.py
+
+{'acc_top1': array([75.], dtype=float32), 'acc_top5': array([100.], dtype=float32)} {'acc_top1': array([75.], dtype=float32), 'acc_top5': array([100.], dtype=float32)}
+INFO 2022-08-05 16:10:30,493 utils.py:118] acc_top1: 
+[2022/08/05 16:10:30] root INFO: acc_top1: 
+INFO 2022-08-05 16:10:30,493 utils.py:124]      mean diff: check passed: True, value: 0.0
+[2022/08/05 16:10:30] root INFO:        mean diff: check passed: True, value: 0.0
+INFO 2022-08-05 16:10:30,493 utils.py:118] acc_top5: 
+[2022/08/05 16:10:30] root INFO: acc_top5: 
+INFO 2022-08-05 16:10:30,493 utils.py:124]      mean diff: check passed: True, value: 0.0
+[2022/08/05 16:10:30] root INFO:        mean diff: check passed: True, value: 0.0
+INFO 2022-08-05 16:10:30,493 ReprodDiffHelper.py:64] diff check passed
+[2022/08/05 16:10:30] root INFO: diff check passed
 ```
