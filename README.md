@@ -9,8 +9,10 @@
     - [3.2 准备数据](#32-准备数据)
     - [3.3 准备模型](#33-准备模型)
 - [4. 开始使用](#4-开始使用)
-    - [4.1 模型评估](#41-模型评估)
-    - [4.2 TIPC基础链条测试](#42-tipc基础链条测试)
+    - [4.1 模型训练](#41-模型训练)
+    - [4.2 模型评估](#42-模型评估)
+    - [4.3 模型预测](#43-模型预测)
+    - [4.4 TIPC基础链条测试](#44-tipc基础链条测试)
 - [5. LICENSE](#5-license)
 - [6. 参考链接与文献](#6-参考链接与文献)
 
@@ -101,7 +103,13 @@ pip install -r requirements.txt
 
 ## 4. 开始使用
 
-### 4.1 模型评估
+### 4.1 模型训练
+
+```shell
+python3 -m paddle.distributed.launch --gpus="0" tools/train.py -c ./ppcls/configs/ImageNet/GENet/GENet_large.yaml
+```
+
+### 4.2 模型评估
 
 ```shell
 python tools/val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_path /path/to/genet_large.pdparams --config /path/to/val_list.txt --batch_size 64 --workers 8
@@ -111,7 +119,9 @@ python tools/val.py --gpu 0 --data /path/to/imgs --arch GENet_large --params_pat
 
 ![paddle模型推理](images/genet_paddle_experiment.png)
 
-### 4.2 TIPC基础链条测试
+### 4.3 模型预测
+
+### 4.4 TIPC基础链条测试
 
 参见[test_tipc](test_tipc/README.md)。
 
