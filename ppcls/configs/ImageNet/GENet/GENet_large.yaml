@@ -50,6 +50,8 @@ DataLoader:
         - DecodeImage:
             to_rgb: True
             channel_first: False
+        - ResizeImage:
+            resize_short: 293
         - RandCropImage:
             size: 256
         - RandFlipImage:
@@ -74,7 +76,7 @@ DataLoader:
 
     sampler:
       name: DistributedBatchSampler
-      batch_size: 32
+      batch_size: 512
       drop_last: False
       shuffle: True
     loader:
@@ -116,9 +118,9 @@ Infer:
         to_rgb: True
         channel_first: False
     - ResizeImage:
-        resize_short: 256
+        resize_short: 293
     - CropImage:
-        size: 224
+        size: 256
     - NormalizeImage:
         scale: 1.0/255.0
         mean: [0.485, 0.456, 0.406]
