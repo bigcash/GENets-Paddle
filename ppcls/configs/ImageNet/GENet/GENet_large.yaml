@@ -2,12 +2,12 @@
 Global:
   checkpoints: null
   pretrained_model: null
-  output_dir: ./output/
+  output_dir: /root/paddlejob/workspace/output/
   device: gpu
   save_interval: 1
   eval_during_train: True
   eval_interval: 1
-  epochs: 120
+  epochs: 480
   print_batch_step: 10
   use_visualdl: False
   # used for static mode and model export
@@ -44,14 +44,12 @@ DataLoader:
   Train:
     dataset:
       name: ImageNetDataset
-      image_root: /home/lingbao/data/imagenet/imgs/
-      cls_label_path: /home/lingbao/data/imagenet/val_list.txt
+      image_root: /root/paddlejob/workspace/train_data/datasets/Light_ILSVRC2012/
+      cls_label_path: /root/paddlejob/workspace/train_data/datasets/Light_ILSVRC2012/train_list.txt
       transform_ops:
         - DecodeImage:
             to_rgb: True
             channel_first: False
-        - ResizeImage:
-            resize_short: 293
         - RandCropImage:
             size: 256
         - RandFlipImage:
@@ -76,7 +74,7 @@ DataLoader:
 
     sampler:
       name: DistributedBatchSampler
-      batch_size: 512
+      batch_size: 256
       drop_last: False
       shuffle: True
     loader:
@@ -86,8 +84,8 @@ DataLoader:
   Eval:
     dataset: 
       name: ImageNetDataset
-      image_root: /home/lingbao/data/imagenet/imgs/
-      cls_label_path: /home/lingbao/data/imagenet/val_list.txt
+      image_root: /root/paddlejob/workspace/train_data/datasets/Light_ILSVRC2012/
+      cls_label_path: /root/paddlejob/workspace/train_data/datasets/Light_ILSVRC2012/val_list.txt
       transform_ops:
         - DecodeImage:
             to_rgb: True
@@ -118,9 +116,9 @@ Infer:
         to_rgb: True
         channel_first: False
     - ResizeImage:
-        resize_short: 293
+        resize_short: 256
     - CropImage:
-        size: 256
+        size: 224
     - NormalizeImage:
         scale: 1.0/255.0
         mean: [0.485, 0.456, 0.406]

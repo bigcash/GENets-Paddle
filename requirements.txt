@@ -1,4 +1,14 @@
-numpy
-paddlepaddle-gpu
-pillow
-opencv-python
+# numpy
+# paddlepaddle-gpu
+# pillow
+# prettytable
+opencv-python==4.4.0.46
+tqdm
+PyYAML
+visualdl>=2.2.0
+scipy
+scikit-learn==0.23.2
+gast==0.3.3
+faiss-cpu==1.7.1.post2
+easydict
+# protobuf==3.20
